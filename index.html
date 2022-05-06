@@ -6,11 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
 </head>
 <body>
     <div class="container">
+        <h1>Calculadora GamaAcademy</h1>
+        <br />
         <form class="calculator" name="calc">
-            <input type="text" name="textInput" class="value" placeholder="0.00" readonly />
+            <input type="text" name="textInput" class="display" placeholder="0.00" readonly />
             <input type="button" value="9" class="numBtn"> 
             <input type="button" value="8" class="numBtn"> 
             <input type="button" value="7" class="numBtn"> 
@@ -28,7 +37,11 @@
             <input type="button" value="AC" class="clearBtn">
             <input type="button" value="/" class="numBtn"> 
         </form>
+        <br />
+        <p>Esc/Delete = AC</p>
     </div>
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="./js/script.js"></script>
 </body>
 </html>

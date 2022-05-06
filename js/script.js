@@ -1,99 +1,108 @@
+let calcDisplay = document.calc.textInput;
+
 // Clear button
 document.querySelector(".clearBtn").addEventListener("click", event => {
-    document.calc.textInput.value = '';
+    calcDisplay.value = '';
 })
 
 // Number and operation buttons
 document.querySelectorAll(".numBtn").forEach(item => {
     item.addEventListener("click", event => {
-        if(calc.textInput.value.substr(0) === '') { 
+        if(calcDisplay.value.substr(0) === '') { 
             if(item.value === '/' || item.value === '*') {
             }
             else {
-                document.calc.textInput.value += item.value;
+                calcDisplay.value += item.value;
             }
-        }else if (document.calc.textInput.value.substr(-1) === '*' ||
-                  document.calc.textInput.value.substr(-1) === '-' ||
-                  document.calc.textInput.value.substr(-1) === '/' ||
-                  document.calc.textInput.value.substr(-1) === '+'){
+        }else if (calcDisplay.value.substr(-1) === '*' ||
+                  calcDisplay.value.substr(-1) === '-' ||
+                  calcDisplay.value.substr(-1) === '/' ||
+                  calcDisplay.value.substr(-1) === '+'){
             if(item.value === '/' || item.value === '*' ||
-                item.value === '+' || item.value === '-') {
+               item.value === '+' || item.value === '-') {
             }
             else {
-                document.calc.textInput.value += item.value;
+                calcDisplay.value += item.value;
             }          
         }else {
-            document.calc.textInput.value += item.value;
+            calcDisplay.value += item.value;
         }  
     })
 })
+
+// alertify
+alertify.defaults.transition = "slide";
 
 // Equal button
 document.querySelector(".resultBtn").addEventListener("click", result); 
 
 // Result
 function result() {
-    let finn = calc.textInput.value.substr(-1);
+    let lastPosition = calcDisplay.value.substr(-1);
 
-    if(finn === '-' || finn === '+' || finn === '/' || finn === '*') { 
-        console.log("inválida...");
+    if(lastPosition === '-' || lastPosition === '+' ||
+       lastPosition === '/' || lastPosition === '*') { 
+        console.log("Operação inválida...");
     } else {
-        alert(document.calc.textInput.value + ' = ' + (eval(calc.textInput.value)).toFixed(2));
-        document.calc.textInput.value = (eval(calc.textInput.value)).toFixed(2);
+        let calcResult = eval(calcDisplay.value).toFixed(2);
+        // alert(calcDisplay.value + ' = ' + calcResult); 
+        alertify.alert(
+            'Resultado do Histórico da Calculadora',
+             calcDisplay.value + ' = ' + calcResult);
+        calcDisplay.value = calcResult;
     }
 }
 
 // Operadores
 function operators() {
-
 }
 
 //Teclado
-document.querySelector(".container").addEventListener("keydown", event => {
+document.querySelector("body").addEventListener("keydown", event => {
    
     // ABNT2
     switch (event.keyCode) {
         case 56: // '*'
             if (event.shiftKey) {
-                if(document.calc.textInput.value.substr(0) === ''){
+                if(calcDisplay.value.substr(0) === ''){
                 }
-                else if (document.calc.textInput.value.substr(-1) === '*' ||
-                        document.calc.textInput.value.substr(-1) === '-' ||
-                        document.calc.textInput.value.substr(-1) === '/' ||
-                        document.calc.textInput.value.substr(-1) === '+'){
+                else if (calcDisplay.value.substr(-1) === '*' ||
+                         calcDisplay.value.substr(-1) === '-' ||
+                         calcDisplay.value.substr(-1) === '/' ||
+                         calcDisplay.value.substr(-1) === '+'){
                 } else {
-                    document.calc.textInput.value += '*';
+                    calcDisplay.value += '*';
                 }
             } 
             break;
-        case 106:
-            if(document.calc.textInput.value.substr(0) === ''){
-            }else if (document.calc.textInput.value.substr(-1) === '*' ||
-                     document.calc.textInput.value.substr(-1) === '-' ||
-                     document.calc.textInput.value.substr(-1) === '/' ||
-                     document.calc.textInput.value.substr(-1) === '+'){
+        case 106: // '*'
+            if(calcDisplay.value.substr(0) === ''){
+            }else if (calcDisplay.value.substr(-1) === '*' ||
+                      calcDisplay.value.substr(-1) === '-' ||
+                      calcDisplay.value.substr(-1) === '/' ||
+                      calcDisplay.value.substr(-1) === '+'){
             } else {
-                document.calc.textInput.value += '*';
+                calcDisplay.value += '*';
             }
             break;
-        case 187:
+        case 187: // '+'
             if (event.shiftKey) {
-                if (document.calc.textInput.value.substr(-1) === '*' ||
-                    document.calc.textInput.value.substr(-1) === '-' ||
-                    document.calc.textInput.value.substr(-1) === '/' ||
-                    document.calc.textInput.value.substr(-1) === '+'){
+                if (calcDisplay.value.substr(-1) === '*' ||
+                    calcDisplay.value.substr(-1) === '-' ||
+                    calcDisplay.value.substr(-1) === '/' ||
+                    calcDisplay.value.substr(-1) === '+'){
                 } else {
-                    document.calc.textInput.value += '+';
+                    calcDisplay.value += '+';
                 }
             } 
             break;
-        case 107:
-            if (document.calc.textInput.value.substr(-1) === '*' ||
-                document.calc.textInput.value.substr(-1) === '-' ||
-                document.calc.textInput.value.substr(-1) === '/' ||
-                document.calc.textInput.value.substr(-1) === '+'){
+        case 107: // '+'
+            if (calcDisplay.value.substr(-1) === '*' ||
+                calcDisplay.value.substr(-1) === '-' ||
+                calcDisplay.value.substr(-1) === '/' ||
+                calcDisplay.value.substr(-1) === '+'){
             } else {
-                document.calc.textInput.value += '+';
+                calcDisplay.value += '+';
             }
             break;
     }
@@ -101,64 +110,65 @@ document.querySelector(".container").addEventListener("keydown", event => {
     // key to string
     switch(event.key.toString()) {
         case '9':
-            document.calc.textInput.value += '9';
+            calcDisplay.value += '9';
             break;
         case '8':
-            document.calc.textInput.value += '8';
+            calcDisplay.value += '8';
             break;
         case '7':
-            document.calc.textInput.value += '7';
+            calcDisplay.value += '7';
             break;
         case '6':
-            document.calc.textInput.value += '6';
+            calcDisplay.value += '6';
             break;
         case '5':
-            document.calc.textInput.value += '5';
+            calcDisplay.value += '5';
             break;
         case '4':
-            document.calc.textInput.value += '4';
+            calcDisplay.value += '4';
             break;
         case '-':
-            if (document.calc.textInput.value.substr(-1) === '*' ||
-                document.calc.textInput.value.substr(-1) === '-' ||
-                document.calc.textInput.value.substr(-1) === '/' ||
-                document.calc.textInput.value.substr(-1) === '+'){
+            if (calcDisplay.value.substr(-1) === '*' ||
+                calcDisplay.value.substr(-1) === '-' ||
+                calcDisplay.value.substr(-1) === '/' ||
+                calcDisplay.value.substr(-1) === '+'){
             } else {
-                document.calc.textInput.value += '-';
+                calcDisplay.value += '-';
             }
             break;
         case '3':
-            document.calc.textInput.value += '3';
+            calcDisplay.value += '3';
             break;
         case '2':
-            document.calc.textInput.value += '2';
+            calcDisplay.value += '2';
             break;
         case '1':
-            document.calc.textInput.value += '1';
+            calcDisplay.value += '1';
             break;
         case '0':
-            document.calc.textInput.value += '0';
+            calcDisplay.value += '0';
             break;
         case '=':
             result();
             break;
         case 'Enter':
             event.preventDefault();
+            result();
             break;
         case 'Esc':
         case 'Escape':
         case 'Delete':
-            document.calc.textInput.value = '';
+            calcDisplay.value = '';
             break;
         case '/':
-            if(document.calc.textInput.value.substr(0) === ''){
+            if(calcDisplay.value.substr(0) === ''){
             }
-            else if (document.calc.textInput.value.substr(-1) === '*' ||
-                document.calc.textInput.value.substr(-1) === '-' ||
-                document.calc.textInput.value.substr(-1) === '/' ||
-                document.calc.textInput.value.substr(-1) === '+'){
+            else if (calcDisplay.value.substr(-1) === '*' ||
+                     calcDisplay.value.substr(-1) === '-' ||
+                     calcDisplay.value.substr(-1) === '/' ||
+                     calcDisplay.value.substr(-1) === '+'){
             } else {
-                document.calc.textInput.value += '/';
+                calcDisplay.value += '/';
             }
             break;
         default:
